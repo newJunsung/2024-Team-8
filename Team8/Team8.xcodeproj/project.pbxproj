@@ -17,9 +17,11 @@
 		0D07D43C2C1CE703008A0381 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D07D43B2C1CE703008A0381 /* StartView.swift */; };
 		0D07D4402C1CF38F008A0381 /* JustRabbitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D07D43F2C1CF38F008A0381 /* JustRabbitView.swift */; };
 		612B4E7E2C1CC24300D21A0E /* VoteLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612B4E7D2C1CC24300D21A0E /* VoteLoadingView.swift */; };
+		612B4EA22C1CDC0B00D21A0E /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612B4EA12C1CDC0B00D21A0E /* FirstView.swift */; };
+		612B4EA42C1CF0F500D21A0E /* VoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612B4EA32C1CF0F500D21A0E /* VoteView.swift */; };
 		86A903012C1CC69A00198638 /* StartTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A903002C1CC69A00198638 /* StartTimeView.swift */; };
 		86A903042C1CC6BC00198638 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A903032C1CC6BC00198638 /* TimerView.swift */; };
-		86A903082C1CCAD900198638 /* Test_TimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A903072C1CCAD900198638 /* Test_TimeInputView.swift */; };
+		86A903082C1CCAD900198638 /* TimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A903072C1CCAD900198638 /* TimeInputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,9 +37,11 @@
 		0D07D43B2C1CE703008A0381 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		0D07D43F2C1CF38F008A0381 /* JustRabbitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustRabbitView.swift; sourceTree = "<group>"; };
 		612B4E7D2C1CC24300D21A0E /* VoteLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteLoadingView.swift; sourceTree = "<group>"; };
+		612B4EA12C1CDC0B00D21A0E /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
+		612B4EA32C1CF0F500D21A0E /* VoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteView.swift; sourceTree = "<group>"; };
 		86A903002C1CC69A00198638 /* StartTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimeView.swift; sourceTree = "<group>"; };
 		86A903032C1CC6BC00198638 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		86A903072C1CCAD900198638 /* Test_TimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_TimeInputView.swift; sourceTree = "<group>"; };
+		86A903072C1CCAD900198638 /* TimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,7 @@
 				0D07D42F2C1CC152008A0381 /* Model */,
 				86A903022C1CC6A700198638 /* Dorami */,
 				0D07D4202C1CA77C008A0381 /* Team8App.swift */,
+				612B4EA32C1CF0F500D21A0E /* VoteView.swift */,
 				612B4E7D2C1CC24300D21A0E /* VoteLoadingView.swift */,
 				0D07D4222C1CA77C008A0381 /* ContentView.swift */,
 				0D07D4242C1CA77D008A0381 /* Assets.xcassets */,
@@ -113,9 +118,10 @@
 		86A903022C1CC6A700198638 /* Dorami */ = {
 			isa = PBXGroup;
 			children = (
-				86A903072C1CCAD900198638 /* Test_TimeInputView.swift */,
+				86A903072C1CCAD900198638 /* TimeInputView.swift */,
 				86A903002C1CC69A00198638 /* StartTimeView.swift */,
 				86A903032C1CC6BC00198638 /* TimerView.swift */,
+				612B4EA12C1CDC0B00D21A0E /* FirstView.swift */,
 			);
 			path = Dorami;
 			sourceTree = "<group>";
@@ -190,10 +196,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				612B4EA22C1CDC0B00D21A0E /* FirstView.swift in Sources */,
 				612B4E7E2C1CC24300D21A0E /* VoteLoadingView.swift in Sources */,
+				612B4EA42C1CF0F500D21A0E /* VoteView.swift in Sources */,
 				0D07D43C2C1CE703008A0381 /* StartView.swift in Sources */,
 				86A903012C1CC69A00198638 /* StartTimeView.swift in Sources */,
-				86A903082C1CCAD900198638 /* Test_TimeInputView.swift in Sources */,
+				86A903082C1CCAD900198638 /* TimeInputView.swift in Sources */,
 				0D07D4232C1CA77C008A0381 /* ContentView.swift in Sources */,
 				0D07D4332C1CC3ED008A0381 /* RestTogether.swift in Sources */,
 				0D07D4402C1CF38F008A0381 /* JustRabbitView.swift in Sources */,
