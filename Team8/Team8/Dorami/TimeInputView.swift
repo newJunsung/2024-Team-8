@@ -87,7 +87,9 @@ struct TimeInputView: View {
                     .padding(.leading, 80)
                     
                     Button(action: {
-                        gaManager.appendStep(.wantToRest(minutes: Int(timeInput) ?? 0))
+                        Task {
+                            try? await gaManager.send(.init(id: UUID(), step: .wantToRest(minutes: Int(timeInput) ?? 0)))
+                        }
                     }, label: {
                         Text("요청하기")
                             .foregroundColor(.white)

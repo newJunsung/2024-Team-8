@@ -12,9 +12,21 @@ struct VoteLoadingView: View {
                 .padding()
         }
         .frame(width: 600, height: 572)
-        .task {
-            Thread.sleep(forTimeInterval: 2)
-            gaManager.appendStep(.startToRest(minutes: 1))
+        .onChange(of: gaManager.agreeToRest) {
+            print("agree +")
+            if gaManager.agreeToRest >= gaManager.participantCount / 2 {
+                Task {
+                    try? await gaManager.send(.init(id: UUID(), step: .readyToRest(minutes: gaManager.minutes)))
+                }
+            }
+        }
+        .onChange(of: gaManager.disagreeToRest) {
+            print("disagree +")
+            if gaManager.disagreeToRest >= gaManager.participantCount / 2 {
+                Task {
+                    try? await gaManager.send(.init(id: UUID(), step: .failToRest))
+                }
+            }
         }
     }
 }

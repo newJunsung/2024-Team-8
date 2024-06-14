@@ -28,15 +28,15 @@ final class GroupActivityManager: ObservableObject {
     private var session: GroupSession<RestTogether>?
     private var messenger: GroupSessionMessenger?
     
-    private var participantCount = 0
+    private(set) var participantCount = 0
     private var cancellables = Set<AnyCancellable>()
     
     let totalMinutes = 240
-    @Published var currentRestTime = 0
+    var currentRestTime = 0
     
-    private var minutes = 0
-    @Published var agreeToRest = 0
-    @Published var disagreeToRest = 0
+    private(set) var minutes = 0
+    var agreeToRest = 0
+    var disagreeToRest = 0
     
     private func sessionJoined(_ session: GroupSession<RestTogether>) {
         if session.state != .joined { session.join() }
@@ -53,28 +53,36 @@ final class GroupActivityManager: ObservableObject {
             .store(in: &cancellables)
     }
     
+    private func setMinutes(_ minutes: Int) {
+        self.minutes = minutes
+    }
+    
+    private func addVoteCount(agree: Int, disagree: Int) {
+        agreeToRest += agree
+        disagreeToRest = disagree
+    }
+    
     private func listenToMessages() {
         guard let messenger else { return }
         Task.detached {
             for await (message, _) in messenger.messages(of: VoteMessage.self) {
                 switch message.step {
                 case .enterRoom:
-                    print("path에 enterRoom 추가")
-                    print("_ 분 쉬고 싶어요 뷰")
+                    await self.appendStep(.enterRoom)
                 case .wantToRest(let minutes):
-                    print("path에 wantToRest 추가")
-                    print("찬성 반대 뷰")
-                case .voteToRest(let argree, let disagree):
-                    print("찬성 반대 분기처리")
-                    print("아직 투표 중이에요. 뷰")
-                case .startToRest(let minutes):
-                    print("누구 하나가 누르면 초 재기 시작")
-                    print("15분 뒤에 돌아오세요 뷰")
+                    await self.setMinutes(minutes)
+                    await self.appendStep(.wantToRest(minutes: minutes))
+                case .voteToRest(let agree, let disagree):
+                    await self.addVoteCount(agree: agree, disagree: disagree)
+                    await self.appendStep(.voteToRest(argree: agree, disagree: disagree))
+                case .readyToRest(let minutes):
+                    await self.appendStep(.readyToRest(minutes: minutes))
+                case .startToRest(minutes: let minutes):
+                    await self.appendStep(.startToRest(minutes: minutes))
                 case .failToRest:
-                    print("누구 하나가 누르면 메인으로 돌아감?")
-                    print("돌아가서 작업을 계속 합시다 뷰")
+                    await self.appendStep(.failToRest)
                 case .finishRest:
-                    print("다시 화이팅! 뷰")
+                    await self.appendStep(.finishRest)
                 }
             }
         }

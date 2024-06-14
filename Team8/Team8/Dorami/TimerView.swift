@@ -129,7 +129,9 @@ extension TimerView {
                 timeRemaining -= 1
             } else {
                 stopTimer()
-                gaManager.appendStep(.finishRest)
+                Task {
+                    try? await gaManager.send(.init(id: UUID(), step: .finishRest))
+                }
             }
         }
         isRunning = true

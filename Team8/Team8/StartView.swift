@@ -33,7 +33,9 @@ struct StartView: View {
                     Spacer()
                 }
                 Button(action: {
-                    gaManager.appendStep(.enterRoom)
+                    Task {
+                        try? await gaManager.send(.init(id: UUID(), step: .enterRoom))
+                    }
                 }) {
                     Text("􁃑 그룹 모으기")
                         .frame(maxWidth: 200, maxHeight: 29)
@@ -48,12 +50,22 @@ struct StartView: View {
                     TimeInputView()
                 case .wantToRest(let minutes):
                     VoteView(minutes: minutes)
-                case .voteToRest(let argree, let disagree):
+                case .voteToRest(_, _):
                     VoteLoadingView()
+                case .readyToRest(let minutes):
+                    JustRabbitView(imageResource: .startRabbit, text: "\(minutes)분 뒤에 돌아오세요.", buttonText: "확인") {
+                        Task {
+                            try? await gaManager.send(.init(id: UUID(), step: .startToRest(minutes: minutes)))
+                        }
+                    }
                 case .startToRest(let minutes):
                     TimerView(timeInput: "\(minutes)")
-                default:
-                    JustRabbitView(imageResource: .tokki, text: "다시 화이팅!", buttonText: "네넹넴넵") {
+                case .failToRest:
+                    JustRabbitView(imageResource: .startRabbit, text: "기각!\n돌아가서 작업을 계속 합시다.", buttonText: "확인") {
+                        gaManager.goToEnter()
+                    }
+                case .finishRest:
+                    JustRabbitView(imageResource: .startRabbit, text: "다시 화이팅!", buttonText: "네넹넴넵") {
                         gaManager.goToEnter()
                     }
                 }
@@ -61,6 +73,7 @@ struct StartView: View {
         }
     }
 }
+
 
 #Preview {
     StartView()

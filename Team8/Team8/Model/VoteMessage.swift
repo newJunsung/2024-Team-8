@@ -16,6 +16,7 @@ enum VoteStep: Hashable, Codable {
     case enterRoom
     case wantToRest(minutes: Int)
     case voteToRest(argree: Int, disagree: Int)
+    case readyToRest(minutes: Int)
     case startToRest(minutes: Int)
     case failToRest
     case finishRest
