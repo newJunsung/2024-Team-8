@@ -11,7 +11,7 @@ import SwiftUI
 struct Team8App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TimerView(timeInput: .constant("15"))
         }
     }
 }
