@@ -34,6 +34,10 @@ struct StartView: View {
                 }
                 Button(action: {
                     Task {
+                        for await session in RestTogether.sessions() {
+                            print("get session")
+                            gaManager.sessionJoined(session)
+                        }
                         try? await gaManager.send(.init(id: UUID(), step: .enterRoom))
                     }
                 }) {

@@ -38,7 +38,7 @@ final class GroupActivityManager: ObservableObject {
     var agreeToRest = 0
     var disagreeToRest = 0
     
-    private func sessionJoined(_ session: GroupSession<RestTogether>) {
+    func sessionJoined(_ session: GroupSession<RestTogether>) {
         if session.state != .joined { session.join() }
         messenger = GroupSessionMessenger(session: session)
         listenToMessages()
