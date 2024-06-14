@@ -44,7 +44,7 @@ struct TimerView: View {
                         .buttonStyle(PlainButtonStyle())
                         .navigationBarBackButtonHidden()
                         
-                    }.padding(.top,-30)
+                    }.offset(x: 0, y: -20)
                     
                     ZStack {
                         Circle()
