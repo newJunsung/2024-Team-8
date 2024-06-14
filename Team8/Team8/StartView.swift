@@ -18,10 +18,10 @@ struct BlueButtonStyle: ButtonStyle {
 }
 
 struct StartView: View {
-    @EnvironmentObject private var navigationManager: NavigationManager
+    @EnvironmentObject private var gaManager: GroupActivityManager
     
     var body: some View {
-        NavigationStack(path: $navigationManager.path) {
+        NavigationStack(path: $gaManager.path) {
             ZStack(alignment: .bottom) {
                 Image(.startRabbit)
                 
@@ -33,7 +33,7 @@ struct StartView: View {
                     Spacer()
                 }
                 Button(action: {
-                    navigationManager.appendStep(.enterRoom)
+                    gaManager.appendStep(.enterRoom)
                 }) {
                     Text("􁃑 그룹 모으기")
                         .frame(maxWidth: 200, maxHeight: 29)
@@ -54,7 +54,7 @@ struct StartView: View {
                     TimerView(timeInput: "\(minutes)")
                 default:
                     JustRabbitView(imageResource: .tokki, text: "다시 화이팅!", buttonText: "네넹넴넵") {
-                        navigationManager.goToEnter()
+                        gaManager.goToEnter()
                     }
                 }
             }
@@ -64,5 +64,5 @@ struct StartView: View {
 
 #Preview {
     StartView()
-        .environmentObject(NavigationManager())
+        .environmentObject(GroupActivityManager())
 }

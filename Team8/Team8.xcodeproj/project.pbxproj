@@ -15,7 +15,6 @@
 		0D07D4362C1CC666008A0381 /* GroupActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D07D4352C1CC666008A0381 /* GroupActivityManager.swift */; };
 		0D07D43C2C1CE703008A0381 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D07D43B2C1CE703008A0381 /* StartView.swift */; };
 		0D07D4402C1CF38F008A0381 /* JustRabbitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D07D43F2C1CF38F008A0381 /* JustRabbitView.swift */; };
-		0D07D4422C1CF9BC008A0381 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D07D4412C1CF9BC008A0381 /* NavigationManager.swift */; };
 		612B4E7E2C1CC24300D21A0E /* VoteLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612B4E7D2C1CC24300D21A0E /* VoteLoadingView.swift */; };
 		612B4EA22C1CDC0B00D21A0E /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612B4EA12C1CDC0B00D21A0E /* FirstView.swift */; };
 		612B4EA42C1CF0F500D21A0E /* VoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612B4EA32C1CF0F500D21A0E /* VoteView.swift */; };
@@ -35,7 +34,6 @@
 		0D07D4352C1CC666008A0381 /* GroupActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupActivityManager.swift; sourceTree = "<group>"; };
 		0D07D43B2C1CE703008A0381 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		0D07D43F2C1CF38F008A0381 /* JustRabbitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustRabbitView.swift; sourceTree = "<group>"; };
-		0D07D4412C1CF9BC008A0381 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		612B4E7D2C1CC24300D21A0E /* VoteLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteLoadingView.swift; sourceTree = "<group>"; };
 		612B4EA12C1CDC0B00D21A0E /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 		612B4EA32C1CF0F500D21A0E /* VoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteView.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				0D07D4352C1CC666008A0381 /* GroupActivityManager.swift */,
-				0D07D4412C1CF9BC008A0381 /* NavigationManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -207,7 +204,6 @@
 				0D07D4312C1CC2B1008A0381 /* VoteMessage.swift in Sources */,
 				0D07D4362C1CC666008A0381 /* GroupActivityManager.swift in Sources */,
 				86A903042C1CC6BC00198638 /* TimerView.swift in Sources */,
-				0D07D4422C1CF9BC008A0381 /* NavigationManager.swift in Sources */,
 				0D07D4212C1CA77C008A0381 /* Team8App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

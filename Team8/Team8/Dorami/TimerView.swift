@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimerView: View {
-    @EnvironmentObject private var navigationManager: NavigationManager
+    @EnvironmentObject private var gaManager: GroupActivityManager
     
     /// ✏️ (수정) 입력뷰에서 받아올 값
     @State var timeInput: String
@@ -129,7 +129,7 @@ extension TimerView {
                 timeRemaining -= 1
             } else {
                 stopTimer()
-                navigationManager.appendStep(.finishRest)
+                gaManager.appendStep(.finishRest)
             }
         }
         isRunning = true

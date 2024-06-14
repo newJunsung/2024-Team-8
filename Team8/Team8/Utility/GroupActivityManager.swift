@@ -11,6 +11,20 @@ import SwiftUI
 
 @MainActor
 final class GroupActivityManager: ObservableObject {
+    @Published var path = [VoteStep]()
+    
+    func appendStep(_ step: VoteStep) {
+        path.append(step)
+    }
+    
+    func goToRoot() {
+        path = []
+    }
+    
+    func goToEnter() {
+        path = [.enterRoom]
+    }
+    
     private var session: GroupSession<RestTogether>?
     private var messenger: GroupSessionMessenger?
     

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TimeInputView: View {
-    @EnvironmentObject private var navigationManager: NavigationManager
+    @EnvironmentObject private var gaManager: GroupActivityManager
     @State private var timeInput: String = ""
     @FocusState private var isFocused: Bool
     let workTime: Double = 2.5  // 작업 시간
@@ -87,7 +87,7 @@ struct TimeInputView: View {
                     .padding(.leading, 80)
                     
                     Button(action: {
-                        navigationManager.appendStep(.wantToRest(minutes: Int(timeInput) ?? 0))
+                        gaManager.appendStep(.wantToRest(minutes: Int(timeInput) ?? 0))
                     }, label: {
                         Text("요청하기")
                             .foregroundColor(.white)
@@ -106,5 +106,5 @@ struct TimeInputView: View {
 
 #Preview{
     TimeInputView()
-        .environmentObject(NavigationManager())
+        .environmentObject(GroupActivityManager())
 }

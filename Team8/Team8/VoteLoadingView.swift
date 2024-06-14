@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct VoteLoadingView: View {
-    @EnvironmentObject private var navigationManager: NavigationManager
+    @EnvironmentObject private var gaManager: GroupActivityManager
     
     var body: some View {
         VStack {
@@ -14,7 +14,7 @@ struct VoteLoadingView: View {
         .frame(width: 600, height: 572)
         .task {
             Thread.sleep(forTimeInterval: 2)
-            navigationManager.appendStep(.startToRest(minutes: 1))
+            gaManager.appendStep(.startToRest(minutes: 1))
         }
     }
 }

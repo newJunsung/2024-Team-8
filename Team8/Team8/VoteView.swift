@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct VoteView: View {
-    @EnvironmentObject private var navigationManager: NavigationManager
+    @EnvironmentObject private var gaManager: GroupActivityManager
     
     let minutes: Int
     
@@ -35,7 +35,7 @@ struct VoteView: View {
             // 원 두 개가 있는 HStack
             HStack(spacing: 60) {  // 원 사이의 간격을 60으로 설정
                 Button(action: {
-                    navigationManager.appendStep(.voteToRest(argree: 0, disagree: 1))
+                    gaManager.appendStep(.voteToRest(argree: 0, disagree: 1))
                 }) {
                     Circle()
                         .frame(width: 90, height: 90)
@@ -49,7 +49,7 @@ struct VoteView: View {
                 }.buttonStyle(PlainButtonStyle())
                 
                 Button(action: {
-                    navigationManager.appendStep(.voteToRest(argree: 1, disagree: 0))
+                    gaManager.appendStep(.voteToRest(argree: 1, disagree: 0))
                 }) {
                     Circle()
                         .frame(width: 90, height: 90)
@@ -70,6 +70,6 @@ struct VoteView: View {
 
 #Preview {
     VoteView(minutes: 5)
-        .environmentObject(NavigationManager())
+        .environmentObject(GroupActivityManager())
 }
 
