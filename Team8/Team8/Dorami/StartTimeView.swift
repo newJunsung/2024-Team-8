@@ -10,7 +10,7 @@ struct StartTimeView: View {
             VStack {
                 Text("\(timeInput)분 뒤에 돌아오세요!")
                 
-                NavigationLink(destination: TimerView(timeInput: timeInput)) {
+                NavigationLink(destination: TimerView(timeInput: $timeInput)) {
                     Text("Start")
                         .background(Color.blue)
                         .cornerRadius(10)
