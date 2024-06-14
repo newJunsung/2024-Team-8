@@ -11,7 +11,8 @@ import SwiftUI
 struct Team8App: App {
     var body: some Scene {
         WindowGroup {
-            TimerView(timeInput: .constant("15"))
+            StartView()
         }
+        .windowResizability(.contentSize)
     }
 }

@@ -5,6 +5,7 @@
 //  Created by 김준성 on 6/15/24.
 //
 
+import Combine
 import GroupActivities
 import SwiftUI
 
@@ -13,6 +14,13 @@ final class GroupActivityManager: ObservableObject {
     private var session: GroupSession<RestTogether>?
     private var messenger: GroupSessionMessenger?
     
+    private var participantCount = 0
+    private var cancellables = Set<AnyCancellable>()
+    
+    let totalMinutes = 240
+    @Published var currentRestTime = 0
+    
+    private var minutes = 0
     @Published var agreeToRest = 0
     @Published var disagreeToRest = 0
     
@@ -20,6 +28,15 @@ final class GroupActivityManager: ObservableObject {
         if session.state != .joined { session.join() }
         messenger = GroupSessionMessenger(session: session)
         listenToMessages()
+        keepParticipantCount()
+    }
+    
+    private func keepParticipantCount() {
+        guard let session else { return }
+        session
+            .$activeParticipants
+            .sink { self.participantCount = $0.count }
+            .store(in: &cancellables)
     }
     
     private func listenToMessages() {
@@ -51,5 +68,12 @@ final class GroupActivityManager: ObservableObject {
     
     func send(_ message: VoteMessage) async throws {
         try await messenger?.send(message)
+    }
+    
+    private func reset() {
+        agreeToRest = 0
+        disagreeToRest = 0
+        currentRestTime += minutes
+        minutes = 0
     }
 }
