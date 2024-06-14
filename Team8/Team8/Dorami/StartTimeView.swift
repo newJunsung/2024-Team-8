@@ -28,7 +28,7 @@ struct StartTimeView: View {
                             .font(.custom("Apple SD Gothic Neo", size: 13).weight(.medium))
                             .tracking(-0.44)
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(PlainButtonStyle()).navigationBarBackButtonHidden()
                 }
                 .padding()
             }
