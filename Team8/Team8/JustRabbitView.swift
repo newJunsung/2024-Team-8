@@ -9,7 +9,7 @@ import SwiftUI
 
 struct JustRabbitView: View {
     let imageResource: ImageResource
-    let minutes: Int
+    let text: String
     let buttonText: String
     let buttonTapHandler: () -> Void
     
@@ -20,7 +20,7 @@ struct JustRabbitView: View {
                 Image(imageResource)
                     .resizable()
                     .frame(width: 250, height: 250)
-                Text("\(minutes)분 뒤에 돌아오세요.")
+                Text(text)
                     .foregroundStyle(.white)
                     .font(.system(size: 22))
             }
@@ -31,6 +31,7 @@ struct JustRabbitView: View {
                     .frame(width: 200, height: 29)
             }
             .buttonStyle(BlueButtonStyle())
+            .padding(.bottom, 20)
         }
         .frame(width: 600, height: 572)
         .background(.primary)
@@ -38,7 +39,7 @@ struct JustRabbitView: View {
 }
 
 #Preview {
-    JustRabbitView(imageResource: .startRabbit, minutes: 1557, buttonText: "확인") {
+    JustRabbitView(imageResource: .startRabbit, text: "fefe", buttonText: "확인") {
         print("123")
     }
 }

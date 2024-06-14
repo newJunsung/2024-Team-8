@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct TimerView: View {
+    @EnvironmentObject private var navigationManager: NavigationManager
     
     /// ✏️ (수정) 입력뷰에서 받아올 값
-    @Binding var timeInput: String
+    @State var timeInput: String
     
     @State private var timeRemaining: TimeInterval = 0
     
@@ -25,67 +26,65 @@ struct TimerView: View {
     
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.primary.ignoresSafeArea()
-                VStack(alignment: .center, spacing: 28) {
+        ZStack {
+            Color.primary.ignoresSafeArea()
+            VStack(alignment: .center, spacing: 28) {
+                
+                //                    HStack {
+                //                        Spacer()
+                //                        NavigationLink(destination: TimerView(timeInput: $timeInput)) {
+                //                            Text("그만 두기")
+                //                                .frame(width: 63, height: 20)
+                //                                .background(Color.white.opacity(0.2))
+                //                                .foregroundColor(.white)
+                //                                .cornerRadius(5)
+                //                                .font(.system(size: 13, weight: .medium))
+                //                        }
+                //                        .padding(.trailing, 20)
+                //                        .buttonStyle(PlainButtonStyle())
+                //                        .navigationBarBackButtonHidden()
+                //                        
+                //                    }.offset(x: 0, y: -20)
+                
+                ZStack {
+                    Circle()
+                        .stroke(Color(red: 0.23, green: 0.23, blue: 0.24),lineWidth: 5)
+                        .opacity(0.3)
                     
-                    HStack {
-                        Spacer()
-                        NavigationLink(destination: TimerView(timeInput: $timeInput)) {
-                            Text("그만 두기")
-                                .frame(width: 63, height: 20)
-                                .background(Color.white.opacity(0.2))
-                                .foregroundColor(.white)
-                                .cornerRadius(5)
-                                .font(.system(size: 13, weight: .medium))
-                        }
-                        .padding(.trailing, 20)
-                        .buttonStyle(PlainButtonStyle())
-                        .navigationBarBackButtonHidden()
-                        
-                    }.offset(x: 0, y: -20)
+                    Circle()
+                        .trim(from: 0, to: CGFloat(timeRemaining / (Double(timeInput) ?? 1) / 60))
+                        .stroke(style: StrokeStyle(lineWidth: 5,  lineJoin: .round))
+                        .rotationEffect(.degrees(-90))
+                        .foregroundColor(.orange)
                     
-                    ZStack {
-                        Circle()
-                            .stroke(Color(red: 0.23, green: 0.23, blue: 0.24),lineWidth: 5)
-                            .opacity(0.3)
-                        
-                        Circle()
-                            .trim(from: 0, to: CGFloat(timeRemaining / (Double(timeInput) ?? 1) / 60))
-                            .stroke(style: StrokeStyle(lineWidth: 5,  lineJoin: .round))
-                            .rotationEffect(.degrees(-90))
-                            .foregroundColor(.orange)
-                        
-                        VStack {
-                            Text(formattedTime(time: timeRemaining))
-                                .foregroundStyle(Color.white)
-                                .font(.system(size: 96, weight: .regular))
-                            
-                        }
-                    }
-                    .frame(maxWidth: 360)
-                    
-                    
-                    
-                    HStack {
-                        Text("돌아올 시간")
+                    VStack {
+                        Text(formattedTime(time: timeRemaining))
                             .foregroundStyle(Color.white)
-                            .font(.system(size: 22, weight: .bold))
+                            .font(.system(size: 96, weight: .regular))
                         
-                        if let endTime = endTime {
-                            Text(" \(formattedEndTime(endTime))")
-                                .foregroundStyle(Color.white)
-                                .font(.system(size: 22, weight: .regular))
-                        }
                     }
+                }
+                .frame(maxWidth: 360)
+                
+                
+                
+                HStack {
+                    Text("돌아올 시간")
+                        .foregroundStyle(Color.white)
+                        .font(.system(size: 22, weight: .bold))
                     
+                    if let endTime = endTime {
+                        Text(" \(formattedEndTime(endTime))")
+                            .foregroundStyle(Color.white)
+                            .font(.system(size: 22, weight: .regular))
+                    }
                 }
-                .padding(.horizontal, 30)
-                .navigationTitle("Timer")
-                .onAppear {
-                    startTimer()
-                }
+                
+            }
+            .padding(.horizontal, 30)
+            .navigationTitle("Timer")
+            .onAppear {
+                startTimer()
             }
         }
     }
@@ -114,7 +113,7 @@ extension TimerView {
         timer?.invalidate()
         timer = nil
     }
- 
+    
     private func startTimer() {
         guard let inputTime = Double(timeInput), inputTime > 0 else {
             isRunning = false
@@ -130,6 +129,7 @@ extension TimerView {
                 timeRemaining -= 1
             } else {
                 stopTimer()
+                navigationManager.appendStep(.finishRest)
             }
         }
         isRunning = true
@@ -137,7 +137,7 @@ extension TimerView {
 }
 
 #Preview {
-    TimerView(timeInput: .constant("1"))
+    TimerView(timeInput: "1")
         .frame(width: 600, height: 572)
 }
 

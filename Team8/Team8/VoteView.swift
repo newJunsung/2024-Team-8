@@ -1,6 +1,10 @@
 import SwiftUI
 
 struct VoteView: View {
+    @EnvironmentObject private var navigationManager: NavigationManager
+    
+    let minutes: Int
+    
     var body: some View {
         VStack{
             Spacer()
@@ -11,7 +15,7 @@ struct VoteView: View {
             
             HStack{
                 Spacer()
-                Text("5")
+                Text("\(minutes)")
                     .textFieldStyle(.plain)
                     .font(.system(size: 22))
                     .frame(width: 60, height: 16)
@@ -31,7 +35,7 @@ struct VoteView: View {
             // 원 두 개가 있는 HStack
             HStack(spacing: 60) {  // 원 사이의 간격을 60으로 설정
                 Button(action: {
-                    print("반대 버튼 클릭됨")
+                    navigationManager.appendStep(.voteToRest(argree: 0, disagree: 1))
                 }) {
                     Circle()
                         .frame(width: 90, height: 90)
@@ -45,7 +49,7 @@ struct VoteView: View {
                 }.buttonStyle(PlainButtonStyle())
                 
                 Button(action: {
-                    print("찬성 버튼 클릭됨")
+                    navigationManager.appendStep(.voteToRest(argree: 1, disagree: 0))
                 }) {
                     Circle()
                         .frame(width: 90, height: 90)
@@ -65,6 +69,7 @@ struct VoteView: View {
 }
 
 #Preview {
-    VoteView()
+    VoteView(minutes: 5)
+        .environmentObject(NavigationManager())
 }
 

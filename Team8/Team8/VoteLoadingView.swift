@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct VoteLoadingView: View {
+    @EnvironmentObject private var navigationManager: NavigationManager
+    
     var body: some View {
         VStack {
             Text("아직 투표중이에요")
@@ -10,6 +12,10 @@ struct VoteLoadingView: View {
                 .padding()
         }
         .frame(width: 600, height: 572)
+        .task {
+            Thread.sleep(forTimeInterval: 2)
+            navigationManager.appendStep(.startToRest(minutes: 1))
+        }
     }
 }
 

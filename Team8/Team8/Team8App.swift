@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Team8App: App {
+    @StateObject private var navigationManager = NavigationManager()
+    
     var body: some Scene {
         WindowGroup {
             StartView()
+                .environmentObject(navigationManager)
         }
         .windowResizability(.contentSize)
     }

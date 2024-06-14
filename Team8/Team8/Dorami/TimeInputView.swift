@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TimeInputView: View {
+    @EnvironmentObject private var navigationManager: NavigationManager
     @State private var timeInput: String = ""
     @FocusState private var isFocused: Bool
     let workTime: Double = 2.5  // 작업 시간
@@ -9,13 +10,13 @@ struct TimeInputView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            NavigationStack {
                 VStack {
                     Spacer()
                     // 분 입력 필드
                     HStack{
                         Spacer()
                         TextField("", text: $timeInput)
+                            .foregroundStyle(.white)
                             .textFieldStyle(.plain)
                             .font(.system(size: 22))
                             .frame(width: 50, height: 16)
@@ -27,6 +28,7 @@ struct TimeInputView: View {
                                 }
                             }
                         Text("분")
+                            .foregroundStyle(.white)
                             .bold()
                             .font(.system(size: 22))
                         Spacer()
@@ -41,6 +43,7 @@ struct TimeInputView: View {
                     
                     // "쉬고 싶어요" 텍스트
                     Text("쉬고 싶어요")
+                        .foregroundStyle(.white)
                         .bold()
                         .font(.system(size: 22))
                     
@@ -69,29 +72,33 @@ struct TimeInputView: View {
                             .frame(width: 9, height: 9)
                             .foregroundColor(.pink)
                         Text("작업 시간")
+                            .foregroundStyle(.white)
                             .font(.system(size: 12))
                             .padding(.trailing, 5)
                         Circle()
                             .frame(width: 9, height: 9)
                             .foregroundColor(.green)
                         Text("쉬는 시간")
+                            .foregroundStyle(.white)
                             .font(.system(size: 12))
                         Spacer()
                     }
                     .padding(.bottom, 74)
                     .padding(.leading, 80)
                     
-                    // 요청하기 버튼
-                    NavigationLink(destination: StartTimeView(timeInput: $timeInput)) {
+                    Button(action: {
+                        navigationManager.appendStep(.wantToRest(minutes: Int(timeInput) ?? 0))
+                    }, label: {
                         Text("요청하기")
                             .foregroundColor(.white)
                             .frame(width: 200, height: 28)
                             .fontWeight(.semibold)
-                            .opacity(0.7)
-                    }.padding(.bottom, 20)
+                    })
+                    .buttonStyle(BlueButtonStyle())
+                    .padding(.bottom, 20)
                 }
                 .navigationTitle("Gravity")
-            }
+                .background(.primary)
         }
         .frame(width: 600, height: 572)
     }
@@ -99,4 +106,5 @@ struct TimeInputView: View {
 
 #Preview{
     TimeInputView()
+        .environmentObject(NavigationManager())
 }

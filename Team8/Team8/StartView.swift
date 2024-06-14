@@ -18,8 +18,10 @@ struct BlueButtonStyle: ButtonStyle {
 }
 
 struct StartView: View {
+    @EnvironmentObject private var navigationManager: NavigationManager
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationManager.path) {
             ZStack(alignment: .bottom) {
                 Image(.startRabbit)
                 
@@ -30,7 +32,9 @@ struct StartView: View {
                         .padding(.top, 20)
                     Spacer()
                 }
-                Button(action: {}) {
+                Button(action: {
+                    navigationManager.appendStep(.enterRoom)
+                }) {
                     Text("􁃑 그룹 모으기")
                         .frame(maxWidth: 200, maxHeight: 29)
                 }
@@ -38,10 +42,27 @@ struct StartView: View {
             }
             .frame(width: 600, height: 572, alignment: .center)
             .background(Color.primary)
+            .navigationDestination(for: VoteStep.self) { step in
+                switch step {
+                case .enterRoom:
+                    TimeInputView()
+                case .wantToRest(let minutes):
+                    VoteView(minutes: minutes)
+                case .voteToRest(let argree, let disagree):
+                    VoteLoadingView()
+                case .startToRest(let minutes):
+                    TimerView(timeInput: "\(minutes)")
+                default:
+                    JustRabbitView(imageResource: .tokki, text: "다시 화이팅!", buttonText: "네넹넴넵") {
+                        navigationManager.goToEnter()
+                    }
+                }
+            }
         }
     }
 }
 
 #Preview {
     StartView()
+        .environmentObject(NavigationManager())
 }

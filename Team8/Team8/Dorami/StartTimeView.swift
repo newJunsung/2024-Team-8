@@ -19,7 +19,7 @@ struct StartTimeView: View {
                     
                     Spacer()
                     
-                    NavigationLink(destination: TimerView(timeInput: $timeInput)) {
+                    NavigationLink(destination: TimerView(timeInput: "\(timeInput)")) {
                         Text("확인")
                             .frame(width: 200, height: 28)
                             .background(Color.blue)
