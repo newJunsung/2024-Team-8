@@ -26,38 +26,66 @@ struct TimerView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(alignment: .center) {
-                
-                ZStack {
-                    Circle()
-                        .stroke(lineWidth: 5)
-                        .opacity(0.3)
+            ZStack {
+                Color.primary.ignoresSafeArea()
+                VStack(alignment: .center, spacing: 28) {
                     
-                    Circle()
-                        .trim(from: 0, to: CGFloat(timeRemaining / (Double(timeInput) ?? 1) / 60))
-                        .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
-                        .rotationEffect(.degrees(-90))
-                        .foregroundColor(.orange)
-                    
-                    VStack {
-                        Text(formattedTime(time: timeRemaining))
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: TimerView(timeInput: $timeInput)) {
+                            Text("그만 두기")
+                                .frame(width: 63, height: 20)
+                                .background(Color.white.opacity(0.2))
+                                .foregroundColor(.white)
+                                .cornerRadius(5)
+                                .font(.system(size: 13, weight: .medium))
+                        }
+                        .padding(.trailing, 20)
+                        .buttonStyle(PlainButtonStyle())
+                        .navigationBarBackButtonHidden()
                         
+                    }.offset(x: 0, y: -20)
+                    
+                    ZStack {
+                        Circle()
+                            .stroke(Color(red: 0.23, green: 0.23, blue: 0.24),lineWidth: 5)
+                            .opacity(0.3)
+                        
+                        Circle()
+                            .trim(from: 0, to: CGFloat(timeRemaining / (Double(timeInput) ?? 1) / 60))
+                            .stroke(style: StrokeStyle(lineWidth: 5,  lineJoin: .round))
+                            .rotationEffect(.degrees(-90))
+                            .foregroundColor(.orange)
+                        
+                        VStack {
+                            Text(formattedTime(time: timeRemaining))
+                                .foregroundStyle(Color.white)
+                                .font(.system(size: 96, weight: .regular))
+                            
+                        }
                     }
+                    .frame(maxWidth: 360)
+                    
+                    
+                    
+                    HStack {
+                        Text("돌아올 시간")
+                            .foregroundStyle(Color.white)
+                            .font(.system(size: 22, weight: .bold))
+                        
+                        if let endTime = endTime {
+                            Text(" \(formattedEndTime(endTime))")
+                                .foregroundStyle(Color.white)
+                                .font(.system(size: 22, weight: .regular))
+                        }
+                    }
+                    
                 }
-                .frame(maxWidth: 500)
-                
-                if let endTime = endTime {
-                    Text("돌아올 시간: \(formattedEndTime(endTime))")
-                        .font(.title2)
+                .padding(.horizontal, 30)
+                .navigationTitle("Timer")
+                .onAppear {
+                    startTimer()
                 }
-
-            }
-            .padding(.horizontal, 30)
-            .navigationTitle("Timer")
-            .onAppear {
-                startTimer()
             }
         }
     }
@@ -109,7 +137,7 @@ extension TimerView {
 }
 
 #Preview {
-    TimerView(timeInput: .constant("15"))
-        .frame(minWidth: 600, idealWidth: 600, maxWidth: 600, minHeight: 572, idealHeight: 572, maxHeight: 572)
+    TimerView(timeInput: .constant("1"))
+        .frame(width: 600, height: 572)
 }
 

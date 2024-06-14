@@ -2,27 +2,41 @@ import SwiftUI
 
 struct StartTimeView: View {
     
-    /// ✏️ (수정) 입력뷰에서 받아올 값
     @Binding var timeInput: String
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Text("\(timeInput)분 뒤에 돌아오세요!")
+            ZStack {
+                Color.primary.ignoresSafeArea() // Set the entire background to primary color
                 
-                NavigationLink(destination: TimerView(timeInput: $timeInput)) {
-                    Text("Start")
-                        .background(Color.blue)
-                        .cornerRadius(10)
+                VStack {
+                    Spacer()
+                    Text("\(timeInput)분 뒤에 돌아오세요!")
+                        .padding(.bottom, 20)
+                        .foregroundColor(.white)
+                        .font(.custom("Apple SD Gothic Neo", size: 22).weight(.bold))
+                        .tracking(-0.44)
+                    
+                    Spacer()
+                    
+                    NavigationLink(destination: TimerView(timeInput: $timeInput)) {
+                        Text("확인")
+                            .frame(width: 200, height: 28)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(5)
+                            .font(.custom("Apple SD Gothic Neo", size: 13).weight(.medium))
+                            .tracking(-0.44)
+                    }
+                    .buttonStyle(PlainButtonStyle()).navigationBarBackButtonHidden()
                 }
-                .padding(.top, 20)
+                .padding()
             }
-            .navigationTitle("Start Timer")
-            .padding()
         }
     }
 }
 
 #Preview {
     StartTimeView(timeInput: .constant("15"))
+        .frame(width: 600, height: 572)
 }
