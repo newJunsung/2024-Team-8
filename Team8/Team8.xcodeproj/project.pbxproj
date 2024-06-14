@@ -11,6 +11,7 @@
 		0D07D4232C1CA77C008A0381 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D07D4222C1CA77C008A0381 /* ContentView.swift */; };
 		0D07D4252C1CA77D008A0381 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D07D4242C1CA77D008A0381 /* Assets.xcassets */; };
 		0D07D4282C1CA77D008A0381 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D07D4272C1CA77D008A0381 /* Preview Assets.xcassets */; };
+		612B4E7E2C1CC24300D21A0E /* VoteLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612B4E7D2C1CC24300D21A0E /* VoteLoadingView.swift */; };
 		86A903012C1CC69A00198638 /* StartTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A903002C1CC69A00198638 /* StartTimeView.swift */; };
 		86A903042C1CC6BC00198638 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A903032C1CC6BC00198638 /* TimerView.swift */; };
 		86A903082C1CCAD900198638 /* Test_TimeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A903072C1CCAD900198638 /* Test_TimeInputView.swift */; };
@@ -23,6 +24,7 @@
 		0D07D4242C1CA77D008A0381 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D07D4272C1CA77D008A0381 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0D07D4292C1CA77D008A0381 /* Team8.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Team8.entitlements; sourceTree = "<group>"; };
+		612B4E7D2C1CC24300D21A0E /* VoteLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteLoadingView.swift; sourceTree = "<group>"; };
 		86A903002C1CC69A00198638 /* StartTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimeView.swift; sourceTree = "<group>"; };
 		86A903032C1CC6BC00198638 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		86A903072C1CCAD900198638 /* Test_TimeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_TimeInputView.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			children = (
 				86A903022C1CC6A700198638 /* Dorami */,
 				0D07D4202C1CA77C008A0381 /* Team8App.swift */,
+				612B4E7D2C1CC24300D21A0E /* VoteLoadingView.swift */,
 				0D07D4222C1CA77C008A0381 /* ContentView.swift */,
 				0D07D4242C1CA77D008A0381 /* Assets.xcassets */,
 				0D07D4292C1CA77D008A0381 /* Team8.entitlements */,
@@ -156,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				612B4E7E2C1CC24300D21A0E /* VoteLoadingView.swift in Sources */,
 				86A903012C1CC69A00198638 /* StartTimeView.swift in Sources */,
 				86A903082C1CCAD900198638 /* Test_TimeInputView.swift in Sources */,
 				0D07D4232C1CA77C008A0381 /* ContentView.swift in Sources */,
@@ -220,7 +224,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -277,7 +281,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
