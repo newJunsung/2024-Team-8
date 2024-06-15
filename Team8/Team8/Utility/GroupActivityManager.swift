@@ -28,7 +28,7 @@ final class GroupActivityManager: ObservableObject {
     private var session: GroupSession<RestTogether>?
     private var messenger: GroupSessionMessenger?
     
-    private(set) var participantCount = 0
+    private(set) var participantCount = 2
     private var cancellables = Set<AnyCancellable>()
     
     let totalMinutes = 240
@@ -59,7 +59,7 @@ final class GroupActivityManager: ObservableObject {
     
     private func addVoteCount(agree: Int, disagree: Int) {
         agreeToRest += agree
-        disagreeToRest = disagree
+        disagreeToRest += disagree
         print(agreeToRest, disagreeToRest)
     }
     
@@ -97,6 +97,7 @@ final class GroupActivityManager: ObservableObject {
             break
         case .voteToRest(let argree, let disagree):
             addVoteCount(agree: argree, disagree: disagree)
+            print(self.agreeToRest, self.disagreeToRest)
         case .readyToRest(let minutes):
             break
         case .startToRest(let minutes):
