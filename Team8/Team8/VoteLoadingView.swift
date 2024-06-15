@@ -10,24 +10,16 @@ struct VoteLoadingView: View {
                 .padding()
             DotLoadingIndicatorView()
                 .padding()
+                .onChange(of: gaManager.agreeToRest, initial: true) { oldValue, newValue in
+                    if newValue >= gaManager.participantCount / 2 {
+                        Task {
+                            print("fjfjfj")
+                            try await gaManager.send(.init(id: UUID(), step: .readyToRest(minutes: gaManager.minutes)))
+                        }
+                    }
+                }
         }
         .frame(width: 600, height: 572)
-        .onReceive(gaManager.$agreeToRest) { agree in
-            print("agree \(agree)")
-            if gaManager.agreeToRest >= gaManager.participantCount / 2 {
-                Task {
-                    try? await gaManager.send(.init(id: UUID(), step: .readyToRest(minutes: gaManager.minutes)))
-                }
-            }
-        }
-        .onReceive(gaManager.$disagreeToRest) { disagree in
-            print("disagree: \(disagree)")
-            if gaManager.disagreeToRest >= gaManager.participantCount / 2 {
-                Task {
-                    try? await gaManager.send(.init(id: UUID(), step: .failToRest))
-                }
-            }
-        }
     }
 }
 

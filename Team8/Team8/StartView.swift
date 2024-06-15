@@ -54,7 +54,7 @@ struct StartView: View {
                 case .voteToRest(_, _):
                     VoteLoadingView()
                 case .readyToRest(let minutes):
-                    JustRabbitView(imageResource: .startRabbit, text: "\(minutes)분 뒤에 돌아오세요.", buttonText: "확인") {
+                    JustRabbitView(imageResource: .tokki, text: "\(minutes)분 뒤에 돌아오세요.", buttonText: "확인") {
                         Task {
                             try? await gaManager.send(.init(id: UUID(), step: .startToRest(minutes: minutes)))
                         }
@@ -66,7 +66,9 @@ struct StartView: View {
                         gaManager.goToEnter()
                     }
                 case .finishRest:
-                    JustRabbitView(imageResource: .startRabbit, text: "다시 화이팅!", buttonText: "네넹넴넵") {
+                    JustRabbitView(imageResource: .doneTokki, text: "다시 화이팅!", buttonText: "네넹넴넵") {
+                        print("네ㅔ넹ㄹ더ㅑ")
+                        gaManager.reset()
                         gaManager.goToEnter()
                     }
                 }

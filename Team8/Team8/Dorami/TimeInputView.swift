@@ -4,9 +4,9 @@ struct TimeInputView: View {
     @EnvironmentObject private var gaManager: GroupActivityManager
     @State private var timeInput: String = ""
     @FocusState private var isFocused: Bool
-    let workTime: Double = 2.5  // 작업 시간
-    let restTime: Double = 1.5  // 쉬는 시간
-    let totalTime: Double = 4.0  // 전체 시간
+    @State var workTime: Double = 0  // 작업 시간
+    @State var restTime: Double = 0  // 쉬는 시간
+    let totalTime: Double = 240  // 전체 시간
     
     var body: some View {
         GeometryReader { geometry in
@@ -71,14 +71,14 @@ struct TimeInputView: View {
                         Circle()
                             .frame(width: 9, height: 9)
                             .foregroundColor(.pink)
-                        Text("작업 시간")
+                        Text("쉬는 시간")
                             .foregroundStyle(.white)
                             .font(.system(size: 12))
                             .padding(.trailing, 5)
                         Circle()
                             .frame(width: 9, height: 9)
                             .foregroundColor(.green)
-                        Text("쉬는 시간")
+                        Text("작업 시간")
                             .foregroundStyle(.white)
                             .font(.system(size: 12))
                         Spacer()
@@ -87,6 +87,7 @@ struct TimeInputView: View {
                     .padding(.leading, 80)
                     
                     Button(action: {
+                        gaManager.minutes = Int(timeInput) ?? 0
                         Task {
                             try? await gaManager.send(.init(id: UUID(), step: .wantToRest(minutes: Int(timeInput) ?? 0)))
                         }
@@ -101,6 +102,11 @@ struct TimeInputView: View {
                 }
                 .navigationTitle("Gravity")
                 .background(.primary)
+                .onChange(of: gaManager.currentRestTime, initial: true) {
+                    workTime = Double(gaManager.currentRestTime)
+                    restTime = totalTime - workTime
+                    print(workTime, restTime)
+                }
         }
         .frame(width: 600, height: 572)
     }

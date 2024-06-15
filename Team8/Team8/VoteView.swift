@@ -49,6 +49,7 @@ struct VoteView: View {
                 }.buttonStyle(PlainButtonStyle())
                 
                 Button(action: {
+                    gaManager.agreeToRest += 1
                     gaManager.appendStep(.voteToRest(argree: 1, disagree: 0))
                 }) {
                     Circle()
