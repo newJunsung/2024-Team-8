@@ -20,10 +20,12 @@ struct VoteView: View {
                     .font(.system(size: 22))
                     .frame(width: 60, height: 16)
                     .bold()
+                    .foregroundStyle(.white)
                 
                 Text("분")
                     .bold()
                     .font(.system(size: 22))
+                    .foregroundStyle(.white)
                 Spacer()
             }.padding(.top, 16)
             
@@ -31,6 +33,7 @@ struct VoteView: View {
             Text("쉬고 싶어요")
                 .bold()
                 .font(.system(size: 22))
+                .foregroundStyle(.white)
             
             // 원 두 개가 있는 HStack
             HStack(spacing: 60) {  // 원 사이의 간격을 60으로 설정
@@ -65,7 +68,9 @@ struct VoteView: View {
             }
             .padding(.bottom, 52)
             
-        }.frame(width: 600, height:  572)
+        }
+        .frame(width: 600, height:  572)
+        .background(.primary)
     }
 }
 

@@ -60,6 +60,7 @@ final class GroupActivityManager: ObservableObject {
     func addVoteCount(agree: Int, disagree: Int) {
         agreeToRest += agree
         disagreeToRest += disagree
+        print(agree, disagree)
     }
     
     private func listenToMessages() {
@@ -70,10 +71,12 @@ final class GroupActivityManager: ObservableObject {
                 case .enterRoom:
                     await self.appendStep(.enterRoom)
                 case .wantToRest(let minutes):
-                    await self.setMinutes(minutes)
+                        await self.setMinutes(minutes)
                     await self.appendStep(.wantToRest(minutes: minutes))
                 case .voteToRest(let agree, let disagree):
-                    await self.addVoteCount(agree: agree, disagree: disagree)
+                    await MainActor.run {
+                        self.addVoteCount(agree: agree, disagree: disagree)
+                    }
                     await self.appendStep(.voteToRest(argree: agree, disagree: disagree))
                 case .readyToRest(let minutes):
                     await self.appendStep(.readyToRest(minutes: minutes))
