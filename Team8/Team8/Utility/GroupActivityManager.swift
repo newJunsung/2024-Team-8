@@ -35,14 +35,14 @@ final class GroupActivityManager: ObservableObject {
     var currentRestTime = 0
     
     private(set) var minutes = 0
-    var agreeToRest = 0
-    var disagreeToRest = 0
+    @Published var agreeToRest = 0
+    @Published var disagreeToRest = 0
     
     func sessionJoined(_ session: GroupSession<RestTogether>) {
-        if session.state != .joined { session.join() }
         messenger = GroupSessionMessenger(session: session)
         listenToMessages()
         keepParticipantCount()
+        if session.state != .joined { session.join() }
     }
     
     private func keepParticipantCount() {
@@ -60,6 +60,7 @@ final class GroupActivityManager: ObservableObject {
     private func addVoteCount(agree: Int, disagree: Int) {
         agreeToRest += agree
         disagreeToRest = disagree
+        print(agreeToRest, disagreeToRest)
     }
     
     private func listenToMessages() {
@@ -89,6 +90,22 @@ final class GroupActivityManager: ObservableObject {
     }
     
     func send(_ message: VoteMessage) async throws {
+        switch message.step {
+        case .enterRoom:
+            break
+        case .wantToRest(let minutes):
+            break
+        case .voteToRest(let argree, let disagree):
+            addVoteCount(agree: argree, disagree: disagree)
+        case .readyToRest(let minutes):
+            break
+        case .startToRest(let minutes):
+            break
+        case .failToRest:
+            break
+        case .finishRest:
+            break   
+        }
         try await messenger?.send(message)
         appendStep(message.step)
     }
