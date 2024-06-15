@@ -34,10 +34,7 @@ struct StartView: View {
                 }
                 Button(action: {
                     Task {
-                        for await session in RestTogether.sessions() {
-                            print("get session")
-                            gaManager.sessionJoined(session)
-                        }
+                        print(try? await RestTogether().activate())
                         try? await gaManager.send(.init(id: UUID(), step: .enterRoom))
                     }
                 }) {
@@ -72,6 +69,12 @@ struct StartView: View {
                     JustRabbitView(imageResource: .startRabbit, text: "다시 화이팅!", buttonText: "네넹넴넵") {
                         gaManager.goToEnter()
                     }
+                }
+            }
+            .task {
+                for await session in RestTogether.sessions() {
+                    print("get session")
+                    gaManager.sessionJoined(session)
                 }
             }
         }

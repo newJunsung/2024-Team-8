@@ -90,6 +90,7 @@ final class GroupActivityManager: ObservableObject {
     
     func send(_ message: VoteMessage) async throws {
         try await messenger?.send(message)
+        appendStep(message.step)
     }
     
     private func reset() {
